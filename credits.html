@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1c2b20" />
+
+    <title>Trailers Vision - Credits</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <!-- Link to your variables.css for shared styles like colors -->
+    <link rel="stylesheet" href="variables.css" />
+    <style>
+      /* --- Base Styles from Original HTML --- */
+      body {
+        font-family: "Minecraft Seven";
+        margin: 0;
+        color: #fff;
+        background-color: #f0f0f0;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      header {
+        background-color: #1c2b20;
+        transition: 0.3s ease;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 20px 0;
+        text-align: center;
+        font-family: "Minecraft Five", sans-serif;
+      }
+      header.scrolled {
+        background-color: rgba(28, 43, 32, 0.7);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s ease;
+      }
+
+      .logo {
+        margin-right: 50px;
+        transition: 0.3s ease;
+      }
+
+      .nav-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        transition: 0.3s ease;
+      }
+
+      .nav-links li {
+        margin: 0 15px;
+        transition: 0.3s ease;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #fff;
+        padding: 37px 15px;
+        transition: 0.3s ease;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        background-color: rgb(111, 226, 142, 0.1);
+      }
+
+      .hero {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.1)
+          ),
+          url("assets/images/dirt.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        image-rendering: pixelated;
+        text-align: center;
+        text-shadow: 5px 5px 0 #00000020;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 475px;
+      }
+
+      .hero-title {
+        font-size: 64px;
+        font-family: "Minecraft Ten";
+        font-weight: 100;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: 0.3s ease;
+      }
+
+      .section-title {
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .footer {
+        background-color: #333;
+        padding: 40px 20px;
+        text-align: center;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-content-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        width: 100%;
+        margin-bottom: 30px;
+        text-align: left;
+      }
+
+      .footer-credits-main {
+        text-align: left;
+        font-family: "Minecraft Seven";
+        font-size: 14px;
+        color: #b3b3b3;
+        padding-right: 20px;
+      }
+
+      .footer-credits-responsive {
+        display: none;
+      }
+
+      .credits {
+        color: #b3b3b3;
+      }
+
+      .logo-footer {
+        transition: 0.3s ease;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0;
+      }
+
+      .resourcepack-style {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 12px;
+        border: 2px solid #ffd4bf;
+        background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)),
+          url("assets/images/dirt.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        image-rendering: pixelated;
+        max-width: 300px;
+        margin-left: 20px;
+        margin-right: 0;
+      }
+
+      .resourcepack-pack-png {
+        width: 60px;
+        height: 60px;
+        background-color: #eee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .resourcepack-title {
+        font-family: "Minecraft Seven";
+        font-size: 18px;
+        text-align: left;
+        color: #fff;
+        letter-spacing: 1px;
+        font-weight: 100;
+      }
+      .resourcepack-description {
+        font-family: "Minecraft Seven";
+        font-size: 18px;
+        text-align: left;
+        color: #aaa;
+        letter-spacing: 1px;
+        font-weight: 100;
+      }
+
+      .footer-bottom-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .footer-affiliation-text {
+        font-family: Minecraft Seven;
+        color: #b3b3b3;
+        font-weight: 100;
+        margin: 10px auto 0;
+        text-align: center;
+      }
+
+      /* --- credits things --- */
+      .credits-section {
+        background-color: #f0f0f0;
+        padding: 40px 20px;
+        text-align: center;
+        color: #333;
+      }
+
+      .credits-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 2px solid var(--button-border-color);
+        text-align: left;
+        font-family: "Minecraft Seven", sans-serif;
+        font-size: 1.1em;
+        line-height: 1.6;
+        color: #555;
+      }
+
+      .credits-content h3 {
+        font-family: "Minecraft Five", sans-serif;
+        font-size: 1.8em;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #1c2b20;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .credits-content ul {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 20px;
+      }
+
+      .credits-content li {
+        margin-bottom: 8px;
+      }
+
+      .credits-content a {
+        color: #2d8be3;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .credits-content a:hover {
+        color: #13b054;
+      }
+
+      @media (max-width: 910px) {
+        .footer-content-wrapper {
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+
+        .footer-credits-main {
+          display: none;
+        }
+
+        .footer-credits-responsive {
+          display: block;
+          font-family: "Minecraft Seven";
+          font-size: 14px;
+          color: #aaa;
+          text-align: center;
+          margin-bottom: 10px;
+        }
+
+        .logo-footer {
+          margin-left: 0;
+          margin-right: 0;
+          margin-bottom: 20px;
+        }
+
+        .resourcepack-style {
+          margin-left: 0;
+          margin-right: 0;
+          margin-top: 0;
+        }
+
+        .footer-bottom-text {
+          order: 1;
+        }
+        .footer-affiliation-text {
+          margin-top: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        header {
+          padding: 20px 0 10px 0;
+        }
+        .navbar {
+          flex-direction: column;
+        }
+
+        .logo {
+          margin-bottom: 10px;
+          margin-right: 0;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero-title {
+          font-size: 48px;
+          margin-left: 10px;
+        }
+
+        .hero {
+          display: flex;
+          justify-content: left;
+          align-items: center;
+          height: 200px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .logo {
+          margin-right: 0;
+        }
+
+        .navbar {
+          flex-direction: column;
+        }
+
+        .hero-title {
+          font-size: 48px;
+          text-align: left;
+          max-width: 250px;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+        }
+
+        .section-title {
+          font-size: 28px;
+        }
+        .credits-content {
+          padding: 15px;
+          font-size: 1em;
+        }
+        .credits-content h3 {
+          font-size: 1.5em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img
+            src="assets/images/logo.png"
+            alt="Trailers Vision Logo"
+            style="height: 50px"
+          />
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#image-gallery">Gallery</a></li>
+          <li><a href="index.html#downloads-section">Downloads</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="credits.html" class="active">Credits</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Pic -->
+    <section class="hero" id="home">
+      <h1 class="hero-title">Credits</h1>
+    </section>
+
+    <!-- Credits Content  -->
+    <section class="credits-section">
+      <div class="credits-content">
+        <h3>Website</h3>
+        <ul>
+          <li><strong>Designed by:</strong> DiamondIsntHere.</li>
+          <li>
+            <strong>Buttons design:</strong> Minecraft Wiki (<a
+              href="https://minecraft.wiki/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >minecraft.wiki</a
+            >)
+          </li>
+        </ul>
+
+        <h3>Special Thanks</h3>
+        <ul>
+          <li>To the entire Minecraft community for continuous inspiration.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="footer" id="footer">
+      <div class="footer-content-wrapper">
+        <div class="footer-credits-main">
+          <p>Designed by DiamondIsntHere</p>
+          <p><a href="index.html" class="credits">Back</a></p>
+        </div>
+        <div class="logo-footer">
+          <img
+            src="assets/images/logo.png"
+            alt="Minecraft Trailers Vision Logo"
+            style="height: 50px"
+          />
+        </div>
+        <div class="resourcepack-style">
+          <div class="resourcepack-pack-png">
+            <img
+              src="assets/images/pack.png"
+              alt="Name"
+              style="width: 60px; height: 60px; object-fit: cover"
+            />
+          </div>
+          <div>
+            <div class="resourcepack-title">Trailers Vision</div>
+            <div class="resourcepack-description">
+              Make Minecraft look like trailers!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-text">
+        <p class="footer-credits-responsive">
+          Designed by DiamondIsntHere<br /><br />
+          <a href="index.html" class="credits">Back</a>
+        </p>
+        <p class="footer-affiliation-text">Not Affiliated With Mojang AB</p>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>

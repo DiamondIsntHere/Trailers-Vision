@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1c2b20" />
+
+    <title>Trailers Vision</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <link rel="stylesheet" href="variables.css" />
+    <style>
+      body {
+        font-family: "Minecraft Seven";
+        margin: 0;
+        color: #fff;
+        background-color: #f0f0f0;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      header {
+        background-color: #1c2b20;
+        transition: 0.3s ease;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 20px 0;
+        text-align: center;
+        font-family: "Minecraft Five", sans-serif;
+      }
+      header.scrolled {
+        background-color: rgba(28, 43, 32, 0.7);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s ease;
+      }
+
+      .logo {
+        margin-right: 50px;
+        transition: 0.3s ease;
+      }
+
+      .nav-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        transition: 0.3s ease;
+      }
+
+      .nav-links li {
+        margin: 0 15px;
+        transition: 0.3s ease;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #fff;
+        padding: 37px 15px;
+        transition: 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        background-color: rgb(111, 226, 142, 0.1);
+      }
+
+      .hero {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.1)
+          ),
+          url("assets/images/gallery/featured.png");
+        background-size: cover;
+        background-position: center;
+        padding: 80px 0;
+        text-align: center;
+        min-height: 475px;
+        text-shadow: 5px 5px 0 #00000020;
+      }
+
+      .hero-title {
+        font-size: 64px;
+        font-family: "Minecraft Ten";
+        font-weight: 100;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: 0.3s ease;
+      }
+
+      .hero-subtitle {
+        font-size: 26px;
+        font-family: "Minecraft Five";
+        font-weight: 100;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        transition: 0.3s ease;
+      }
+
+      .hero-buttons-container {
+        display: flex;
+        justify-content: center;
+        max-width: 280px;
+        margin: 0 auto;
+      }
+
+      .youtube-btn {
+        background-color: #ca3636 !important;
+      }
+
+      h2 {
+        font-size: 48px;
+        font-family: "Minecraft Ten";
+        font-weight: 100;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      button {
+        width: auto;
+        gap: 6px;
+        cursor: pointer;
+        position: relative;
+        text-align: center;
+        background-color: var(--button-color);
+        color: var(--button-text-color);
+        border: 2px solid var(--button-border-color);
+        font-size: 1em;
+        font-weight: bold;
+        transition-property: background-color, color, border-color, box-shadow,
+          opacity, padding, margin, transform;
+        transition-duration: 0.1s;
+        overflow: hidden;
+        display: inline-block;
+        min-width: 50px;
+      }
+
+      button.progressive {
+        background-color: var(--button-color-progressive);
+        --button-text-color: #fff;
+        --button-text-shadow-color: #00000020;
+      }
+
+      button > a {
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        margin: -2px;
+        color: var(--button-text-color) !important;
+        text-decoration: none;
+        text-shadow: 2px 2px 0 var(--button-text-shadow-color);
+        display: flex;
+        gap: 6px;
+        padding: 8px 10px 14px !important;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        transition-property: padding, margin;
+        transition-duration: 0.1s;
+      }
+
+      button::after {
+        display: block;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        box-shadow: 0 -6px 0 0 rgb(104, 104, 104) inset,
+          2px 2px 0 0 rgba(178, 178, 178, 0.5) inset,
+          -2px -8px 0 0 rgba(153, 153, 153, 0.5) inset;
+        mix-blend-mode: hard-light;
+        transition: 0.1s background-color, box-shadow;
+        pointer-events: none;
+      }
+
+      button:active::after {
+        box-shadow: 2px 2px 0 0 rgba(178, 178, 178, 0.5) inset,
+          -2px -2px 0 0 rgba(153, 153, 153, 0.5) inset;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      button:hover:not(:active)::after {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      a.minecraft-button {
+        cursor: pointer;
+        position: relative;
+        text-align: center;
+        background-color: var(--button-color);
+        color: var(--button-text-color);
+        border: 2px solid var(--button-border-color);
+        font-weight: 100;
+        transition-property: background-color, color, border-color, box-shadow,
+          opacity, padding, margin;
+        transition-duration: 0.1s;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        text-shadow: 2px 2px 0 var(--button-text-shadow-color);
+        padding: 8px 20px 14px;
+        margin: 0 auto;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        font-family: "Minecraft Ten";
+        font-size: 32px;
+      }
+
+      a.minecraft-button.progressive {
+        background-color: var(--button-color-progressive);
+        color: #fff !important;
+        text-shadow: 2px 2px 0 #00000020;
+        font-family: "Minecraft Ten";
+        font-weight: 100;
+      }
+
+      /* shadow/highlight */
+      a.minecraft-button::after {
+        display: block;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        box-shadow: 0 -6px 0 0 rgb(104, 104, 104) inset,
+          2px 2px 0 0 rgba(178, 178, 178, 0.5) inset,
+          -2px -8px 0 0 rgba(153, 153, 153, 0.5) inset;
+        mix-blend-mode: hard-light;
+        transition: 0.1s background-color, box-shadow;
+        pointer-events: none;
+      }
+
+      /* Active state for the Minecraft button's shadow thing (when clicked) */
+      a.minecraft-button:active::after {
+        box-shadow: 2px 2px 0 0 rgba(178, 178, 178, 0.5) inset,
+          -2px -2px 0 0 rgba(153, 153, 153, 0.5) inset;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      /* Hover state for the Minecraft button's shadow thing (not active) */
+      a.minecraft-button:hover:not(:active)::after {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Active state for the Minecraft button itself (when clicked) */
+      a.minecraft-button:active {
+        padding: 10px 20px 8px;
+        margin-top: 4px;
+      }
+
+      .image-gallery {
+        padding: 40px 20px;
+        text-align: center;
+        background-color: #fff;
+        color: #333;
+      }
+
+      .carousel-container {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 2px solid #ccc;
+        background-color: #f8f8f8;
+        height: auto;
+        max-height: 450px;
+        aspect-ratio: 16 / 9;
+        touch-action: pan-y;
+        cursor: grab;
+        transition: 0.3s;
+      }
+      .carousel-container.dragging {
+        cursor: grabbing;
+      }
+
+      .carousel-track {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .carousel-image-item {
+        min-width: 100%;
+        height: 100%;
+        object-fit: contain;
+        flex-shrink: 0;
+        border-radius: 20px;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        pointer-events: none;
+      }
+
+      .carousel-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 800px;
+        margin: 20px auto 0 auto;
+        padding: 0 15px;
+      }
+
+      .carousel-button {
+        background-color: var(--button-color);
+        color: var(--button-text-color);
+        border: 2px solid var(--button-border-color);
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 22px;
+        transition: background-color 0.3s ease, box-shadow 0.2s ease,
+          opacity 0.3s ease, transform 0.1s ease, margin-top 0.1s ease;
+        text-shadow: 2px 2px 0 var(--button-text-shadow-color);
+        margin-top: 0px;
+      }
+
+      .carousel-button:hover {
+        opacity: 1;
+      }
+
+      .carousel-button:active {
+        margin-top: 2px;
+        padding: 6px 12px;
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+      }
+
+      .carousel-button::after {
+        display: block;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        box-shadow: 0 -6px 0 0 rgb(104, 104, 104) inset,
+          2px 2px 0 0 rgba(178, 178, 178, 0.5) inset,
+          -2px -8px 0 0 rgba(153, 153, 153, 0.5) inset;
+        mix-blend-mode: hard-light;
+        transition: 0.1s background-color, box-shadow;
+        pointer-events: none;
+      }
+
+      .carousel-button:active::after {
+        box-shadow: 2px 2px 0 0 rgba(178, 178, 178, 0.5) inset,
+          -2px -2px 0 0 rgba(153, 153, 153, 0.5) inset;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .thumbnail-dots-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        margin: 0 20px;
+        flex-wrap: wrap;
+      }
+
+      .dot {
+        height: 15px;
+        width: 15px;
+        margin: 0 8px;
+        background-color: #bbb;
+        display: inline-block;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        cursor: pointer;
+      }
+
+      .dot.active {
+        background-color: var(--button-color);
+        transform: scale(1.2);
+        border: 2px solid var(--button-border-color);
+      }
+
+      .faq {
+        padding: 40px 20px;
+        text-align: center;
+        background-color: #fff;
+        color: #333;
+      }
+
+      .faqs-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-width: 1000px;
+        margin: 0 auto;
+        transition: 0.3s ease;
+        margin-bottom: 32px;
+      }
+
+      .faq-item {
+        width: 90%;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        border: 2px solid var(--button-border-color);
+        overflow: hidden;
+        background-color: var(--button-color);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .faq-question {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 20px 14px 20px;
+        box-sizing: border-box;
+        font-family: "Minecraft Ten", sans-serif;
+        font-size: 1.5em;
+        font-weight: 100;
+        cursor: pointer;
+        background-color: var(--button-color);
+        color: var(--button-text-color);
+        border: none;
+        text-shadow: 2px 2px 0 var(--button-text-shadow-color);
+        outline: none;
+        list-style: none;
+        -webkit-touch-callout: none;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        transition-property: background-color, color, border-color, box-shadow,
+          opacity, padding, margin;
+        transition-duration: 0.1s;
+      }
+
+      .faq-question img {
+        position: static;
+        transform: translateY(0) rotate(0deg);
+        transition: transform 0.2s ease;
+        width: 24px;
+        height: 24px;
+      }
+
+      .faq-item[open] > .faq-question img {
+        transform: translateY(0) rotate(270deg);
+      }
+
+      .faq-question::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        box-shadow: 0 -6px 0 0 rgb(104, 104, 104) inset,
+          2px 2px 0 0 rgba(178, 178, 178, 0.5) inset,
+          -2px -8px 0 0 rgba(153, 153, 153, 0.5) inset;
+        mix-blend-mode: hard-light;
+        transition: 0.1s background-color, box-shadow;
+        pointer-events: none;
+      }
+
+      .faq-question:active::after {
+        box-shadow: 2px 2px 0 0 rgba(178, 178, 178, 0.5) inset,
+          -2px -2px 0 0 rgba(153, 153, 153, 0.5) inset;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .faq-question:hover:not(:active)::after {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .faq-question:active {
+        padding: 6px 20px 10px 20px;
+        margin-top: 8px;
+      }
+
+      .faq-answer {
+        background-color: #f9f9f9;
+        color: #555;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-top: 2px solid var(--button-border-color);
+        text-align: left;
+        font-family: "Minecraft Seven", sans-serif;
+        font-size: 1.1em;
+        line-height: 1.5;
+        overflow: hidden;
+      }
+
+      details > summary {
+        list-style: none;
+      }
+      details > summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .download-section {
+        background-color: #f0f0f0;
+        padding: 40px 20px;
+        text-align: center;
+        color: #333;
+      }
+
+      .section-title {
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .download-edition {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+        font-family: "Minecraft Seven";
+        font-weight: 100;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: 0.3s ease;
+      }
+
+      .download-buttons-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-width: 600px;
+        margin: 0 auto;
+        transition: 0.3s ease;
+        margin-bottom: 32px;
+        align-items: center;
+      }
+
+      .download-button {
+        width: 100%;
+        max-width: 350px;
+        padding: 10px 20px 14px 50px;
+        background-color: var(--button-color);
+        color: var(--button-text-color);
+        border: 2px solid var(--button-border-color);
+        font-size: 1em;
+        font-weight: bold;
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        overflow: hidden;
+        transition: 0.1s ease;
+        box-sizing: border-box;
+      }
+
+      .download-button img {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-55%);
+        width: 32px;
+        height: 32px;
+        transition: transform 0.1s ease;
+      }
+
+      .download-icon {
+        left: 300px !important;
+        opacity: 0.9;
+      }
+
+      .download-button:active img {
+        transform: translateY(calc(-55% + 3px)); /* Push it down 3px */
+      }
+
+      .download-button-modrinth {
+        background-color: #1bd96a !important;
+        color: #e4faed !important;
+      }
+      .download-button-planetminecraft {
+        background-color: #3da2ff !important;
+        color: #e8f4ff !important;
+      }
+      .download-button-modbay {
+        background-color: #bb50cb !important;
+        color: #f7eaf8 !important;
+      }
+
+      #downloads-section > div > a.minecraft-button.progressive > svg {
+        margin-left: 8px;
+      }
+
+      .footer {
+        background-color: #333;
+        padding: 40px 20px;
+        text-align: center;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /
+      }
+
+      .footer-content-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        width: 100%;
+        margin-bottom: 30px;
+        text-align: left;
+      }
+
+      .footer-credits-main {
+        text-align: left;
+        font-family: "Minecraft Seven";
+        font-size: 14px;
+        color: #b3b3b3;
+        padding-right: 20px;
+      }
+
+      .footer-credits-responsive {
+        display: none;
+      }
+
+      .credits {
+        color: #b3b3b3;
+      }
+
+      .logo-footer {
+        transition: 0.3s ease;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0;
+      }
+
+      .resourcepack-style {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 12px;
+        border: 2px solid #ffd4bf;
+        background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)),
+          url("assets/images/dirt.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        image-rendering: pixelated;
+        max-width: 300px;
+        margin-left: 20px;
+        margin-right: 0;
+      }
+
+      .resourcepack-pack-png {
+        width: 60px;
+        height: 60px;
+        background-color: #eee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .resourcepack-title {
+        font-family: "Minecraft Seven";
+        font-size: 18px;
+        text-align: left;
+        color: #fff;
+        letter-spacing: 1px;
+        font-weight: 100;
+      }
+      .resourcepack-description {
+        font-family: "Minecraft Seven";
+        font-size: 18px;
+        text-align: left;
+        color: #aaa;
+        letter-spacing: 1px;
+        font-weight: 100;
+      }
+
+      .footer-bottom-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .footer-affiliation-text {
+        font-family: Minecraft Seven;
+        color: #b3b3b3;
+        font-weight: 100;
+        margin: 10px auto 0;
+        text-align: center;
+      }
+
+      @media (max-width: 910px) {
+        .footer-content-wrapper {
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+
+        .footer-credits-main {
+          display: none;
+        }
+
+        .footer-credits-responsive {
+          display: block;
+          font-family: "Minecraft Seven";
+          font-size: 14px;
+          color: #aaa;
+          text-align: center;
+          margin-bottom: 10px;
+        }
+
+        .logo-footer {
+          margin-left: 0;
+          margin-right: 0;
+          margin-bottom: 20px;
+        }
+
+        .resourcepack-style {
+          margin-left: 0;
+          margin-right: 0;
+          margin-top: 0;
+        }
+
+        .footer-bottom-text {
+          order: 1;
+        }
+        .footer-affiliation-text {
+          margin-top: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        header {
+          padding: 20px 0 10px 0;
+        }
+        .navbar {
+          flex-direction: column;
+        }
+
+        .logo {
+          margin-bottom: 10px;
+          margin-right: 0;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero-title {
+          font-size: 48px;
+        }
+
+        .hero-subtitle {
+          font-size: 20px;
+        }
+
+        .thumbnail-dots-container {
+          margin: 0 10px;
+          flex-wrap: wrap;
+        }
+
+        .dot {
+          margin: 0 5px;
+        }
+
+        .hero-buttons-container {
+          display: flex;
+          justify-content: center;
+          max-width: 280px;
+          margin: 0 auto;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .logo {
+          margin-right: 0;
+        }
+
+        .navbar {
+          flex-direction: column;
+        }
+
+        .nav-links {
+          flex-direction: column;
+          margin-top: 10px;
+          align-items: center;
+        }
+
+        .nav-links li {
+          margin: 5px 0;
+        }
+
+        .hero-title {
+          font-size: 48px;
+          margin-bottom: 20px;
+          text-align: left;
+          margin-left: 10px;
+          max-width: 250px;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+          font-size: 16px;
+          text-align: left;
+          margin-left: 10px;
+          margin-right: 35px;
+        }
+
+        .gallery-title {
+          font-size: 28px;
+        }
+
+        .section-title {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img
+            src="assets/images/logo.png"
+            alt="Minecraft Trailers Vision Logo"
+            style="height: 50px"
+          />
+        </div>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#image-gallery">Gallery</a></li>
+          <li><a href="#downloads-section">Downloads</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="credits.html" class="active">Credits</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Pic -->
+    <section class="hero" id="home">
+      <h1 class="hero-title">Trailers Vision</h1>
+      <p class="hero-subtitle">
+        Turn your game into a living<br />Minecraft trailer!
+      </p>
+      <div class="hero-buttons-container">
+        <a href="#downloads-section" class="minecraft-button progressive">
+          GET NOW!
+        </a>
+        <a
+          href="https://www.youtube.com/watch?v=xLXX8htXz2k"
+          class="youtube-btn minecraft-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="assets/images/icons/youtube.svg"
+            style="width: 32px; height: 32px"
+          />
+        </a>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="image-gallery" id="image-gallery">
+      <h2 class="section-title">Gallery</h2>
+      <div class="carousel-container">
+        <div class="carousel-track"></div>
+      </div>
+
+      <div class="carousel-controls">
+        <button class="carousel-button prev">
+          <img
+            src="assets/images/icons/arrow-back.svg"
+            style="width: 16px; height: 16px"
+          />
+        </button>
+        <div class="thumbnail-dots-container"></div>
+        <button class="carousel-button next">
+          <img
+            src="assets/images/icons/arrow-forward.svg"
+            style="width: 16px; height: 16px"
+          />
+        </button>
+      </div>
+    </section>
+
+    <!-- Downloads -->
+    <section class="download-section" id="downloads-section">
+      <h2 class="section-title">DOWNLOADS</h2>
+      <div class="download-buttons-container">
+        <p class="download-edition section-title">Java Edition</p>
+        <a
+          href="https://modrinth.com/resourcepack/trailers-vision"
+          class="download-button-modrinth download-button minecraft-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="assets/images/download-buttons/modrinth.svg" />
+          Modrinth
+          <img src="assets/images/icons/download.svg" class="download-icon" />
+        </a>
+        <a
+          href="https://www.planetminecraft.com/texture-pack/trailers-texture-pack"
+          class="download-button-planetminecraft download-button minecraft-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="assets/images/download-buttons/planetminecraft.svg" />PMC
+          <img src="assets/images/icons/download.svg" class="download-icon" />
+        </a>
+      </div>
+      <div class="download-buttons-container">
+        <p class="download-edition section-title">Bedrock Edition</p>
+        <a
+          href="https://www.planetminecraft.com/texture-pack/trailers-vision-texture-pack-bedrock/"
+          class="download-button-planetminecraft download-button minecraft-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="assets/images/download-buttons/planetminecraft.svg" />PMC
+          <img src="assets/images/icons/download.svg" class="download-icon" />
+        </a>
+        <a
+          href="https://modbay.org/textures/243-trailers-texture-pack.html"
+          class="download-button-modbay download-button minecraft-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="assets/images/download-buttons/modbay.svg" />ModBay
+          <img src="assets/images/icons/download.svg" class="download-icon" />
+        </a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+
+    <section class="faq" id="faq">
+      <h2 class="section-title">FAQs</h2>
+      <div class="faqs-container">
+        <details class="faq-item">
+          <summary class="faq-question minecraft-button">
+            What exactly is Trailers Vision?
+            <img src="assets/images/icons/arrow.svg" class="faq-icon" />
+          </summary>
+          <div class="faq-answer">
+            <p>
+              Trailers Vision is a resource pack built to make your Minecraft
+              world look like the trailers. We studied tons of official
+              Minecraft trailers, Lives, and covers, then recreated that same
+              cinematic vibe inside your game.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question minecraft-button">
+            What exactly is Trailers Vision?
+            <img src="assets/images/icons/arrow.svg" class="faq-icon" />
+          </summary>
+          <div class="faq-answer">
+            <p>
+              No, it's not Bare Bones. While they both go for a clean aesthetic,
+              Trailers Vision focuses on how trailers look, not just flat
+              textures. Lighting, contrast, block shading — all crafted to match
+              that stylized trailer feel. Completely different goal.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question minecraft-button">
+            Which editions does it support?
+            <img src="assets/images/icons/arrow.svg" class="faq-icon" />
+          </summary>
+          <div class="faq-answer">
+            <p>
+              Both Java and Bedrock editions. Whether you're grinding on PC or
+              playing casually on your phone, you'll get that same polished
+              trailer-style look.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question minecraft-button">
+            Can I use it in my content (YouTube, builds, maps, etc.)?
+            <img src="assets/images/icons/arrow.svg" class="faq-icon" />
+          </summary>
+          <div class="faq-answer">
+            <p>
+              Yup! Just give credit where it's due and don't reupload or edit
+              the pack without permission. Sharing is cool, stealing isn't.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question minecraft-button">
+            Is this pack open source or licensed?
+            <img src="assets/images/icons/arrow.svg" class="faq-icon" />
+          </summary>
+          <div class="faq-answer">
+            <p>
+              Yes, it;s licensed under CC-BY-4.0. That means you're free to
+              share and adapt the pack as long as you credit the creators and
+              follow the license terms.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question minecraft-button">
+            Is this made by Mojang or official in any way?
+            <img src="assets/images/icons/arrow.svg" class="faq-icon" />
+          </summary>
+          <div class="faq-answer">
+            <p>
+              Nope, not affiliated with Mojang AB. This is a fan-made resource
+              pack inspired by official trailers and media.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="footer" id="footer">
+      <div class="footer-content-wrapper">
+        <div class="footer-credits-main">
+          <p>Designed by DiamondIsntHere</p>
+          <p><a href="credits.html" class="credits">Credits</a></p>
+        </div>
+        <div class="logo-footer">
+          <img
+            src="assets/images/logo.png"
+            alt="Minecraft Trailers Vision Logo"
+            style="height: 50px"
+          />
+        </div>
+        <div class="resourcepack-style">
+          <div class="resourcepack-pack-png">
+            <img
+              src="assets/images/pack.png"
+              alt="Name"
+              style="width: 60px; height: 60px; object-fit: cover"
+            />
+          </div>
+          <div>
+            <div class="resourcepack-title">Trailers Vision</div>
+            <div class="resourcepack-description">
+              Make Minecraft look like trailers!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-text">
+        <p class="footer-credits-responsive">
+          Designed by DiamondIsntHere<br /><br />
+          <a href="credits.html" class="credits">Credits</a>
+        </p>
+        <p class="footer-affiliation-text">Not Affiliated With Mojang AB</p>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>

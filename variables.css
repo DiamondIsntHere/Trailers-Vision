@@ -1,0 +1,31 @@
+:root {
+  --button-color: #ebebeb;
+  --button-color-progressive: #3a971e;
+  --button-text-color: #000;
+  --button-border-color: rgba(0, 0, 0, 0.4);
+  --button-text-shadow-color: rgba(0, 0, 0, 0.125);
+}
+
+@font-face {
+  font-family: "Minecraft Ten";
+  src: url("assets/fonts/minecraft-ten.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Minecraft Five";
+  src: url("assets/fonts/Minecraft-Five.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Minecraft Seven";
+  src: url("assets/fonts/Minecraft-Seven.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
