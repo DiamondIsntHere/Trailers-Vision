@@ -8,6 +8,7 @@
     <title>Trailers Vision</title>
     <link rel="icon" type="image/png" href="assets/images/favicon.png" />
     <link rel="stylesheet" href="variables.css" />
+    <link rel="stylesheet" href="animations.css" />
     <style>
       body {
         font-family: "Minecraft Seven";
@@ -265,6 +266,7 @@
         text-align: center;
         background-color: #fff;
         color: #333;
+        scroll-margin-top: 90px;
       }
 
       .carousel-container {
@@ -392,6 +394,7 @@
         text-align: center;
         background-color: #fff;
         color: #333;
+        scroll-margin-top: 90px;
       }
 
       .faqs-container {
@@ -449,6 +452,8 @@
         transition: transform 0.2s ease;
         width: 24px;
         height: 24px;
+        user-select: none;
+        pointer-events: none;
       }
 
       .faq-item[open] > .faq-question img {
@@ -504,6 +509,11 @@
       }
       details > summary::-webkit-details-marker {
         display: none;
+      }
+
+
+      #downloads-section {
+        scroll-margin-top: 90px;
       }
 
       .download-section {
@@ -569,6 +579,8 @@
         width: 32px;
         height: 32px;
         transition: transform 0.1s ease;
+        user-select: none;
+        pointer-events: none;
       }
 
       .download-icon {
@@ -897,12 +909,39 @@
 
     <!-- Downloads -->
     <section class="download-section" id="downloads-section">
-      <h2 class="section-title">DOWNLOADS</h2>
+      <h2 class="section-title animation">DOWNLOADS</h2>
       <div class="download-buttons-container">
-        <p class="download-edition section-title">Java Edition</p>
+        <p class="download-edition section-title animation">Local</p>
+        <a
+          href="assets/downloads/Trailers Vision - 1.21.11.zip"
+          class="download-button minecraft-button animation"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="assets/images/download-buttons/github.svg" />Java
+          <img
+            src="assets/images/icons/download - dark.svg"
+            class="download-icon"
+          />
+        </a>
+        <a
+          href="assets/downloads/Trailers Vision - BE.zip"
+          class="download-button minecraft-button animation"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="assets/images/download-buttons/github.svg" />Bedrock
+          <img
+            src="assets/images/icons/download - dark.svg"
+            class="download-icon"
+          />
+        </a>
+      </div>
+      <div class="download-buttons-container animation">
+        <p class="download-edition section-title animation">Java Edition</p>
         <a
           href="https://modrinth.com/resourcepack/trailers-vision"
-          class="download-button-modrinth download-button minecraft-button"
+          class="download-button-modrinth download-button minecraft-button animation"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -912,7 +951,7 @@
         </a>
         <a
           href="https://www.planetminecraft.com/texture-pack/trailers-texture-pack"
-          class="download-button-planetminecraft download-button minecraft-button"
+          class="download-button-planetminecraft download-button minecraft-button animation"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -920,11 +959,11 @@
           <img src="assets/images/icons/download.svg" class="download-icon" />
         </a>
       </div>
-      <div class="download-buttons-container">
+      <div class="download-buttons-container animation">
         <p class="download-edition section-title">Bedrock Edition</p>
         <a
           href="https://www.planetminecraft.com/texture-pack/trailers-vision-texture-pack-bedrock/"
-          class="download-button-planetminecraft download-button minecraft-button"
+          class="download-button-planetminecraft download-button minecraft-button animation"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -933,7 +972,7 @@
         </a>
         <a
           href="https://modbay.org/textures/243-trailers-texture-pack.html"
-          class="download-button-modbay download-button minecraft-button"
+          class="download-button-modbay download-button minecraft-button animation"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -946,9 +985,9 @@
     <!-- FAQ -->
 
     <section class="faq" id="faq">
-      <h2 class="section-title">FAQs</h2>
+      <h2 class="section-title animation">FAQs</h2>
       <div class="faqs-container">
-        <details class="faq-item">
+        <details class="faq-item animation">
           <summary class="faq-question minecraft-button">
             What exactly is Trailers Vision?
             <img src="assets/images/icons/arrow.svg" class="faq-icon" />
@@ -963,7 +1002,7 @@
           </div>
         </details>
 
-        <details class="faq-item">
+        <details class="faq-item animation">
           <summary class="faq-question minecraft-button">
             Is Trailers Vision the same as Bare Bones?
             <img src="assets/images/icons/arrow.svg" class="faq-icon" />
@@ -977,7 +1016,7 @@
           </div>
         </details>
 
-        <details class="faq-item">
+        <details class="faq-item animation">
           <summary class="faq-question minecraft-button">
             Which editions does it support?
             <img src="assets/images/icons/arrow.svg" class="faq-icon" />
@@ -990,7 +1029,7 @@
           </div>
         </details>
 
-        <details class="faq-item">
+        <details class="faq-item animation">
           <summary class="faq-question minecraft-button">
             Can I use it in my content (YouTube, builds, maps, etc.)?
             <img src="assets/images/icons/arrow.svg" class="faq-icon" />
@@ -1003,7 +1042,7 @@
           </div>
         </details>
 
-        <details class="faq-item">
+        <details class="faq-item animation">
           <summary class="faq-question minecraft-button">
             Is this pack open source or licensed?
             <img src="assets/images/icons/arrow.svg" class="faq-icon" />
@@ -1017,7 +1056,7 @@
           </div>
         </details>
 
-        <details class="faq-item">
+        <details class="faq-item animation">
           <summary class="faq-question minecraft-button">
             Is this made by Mojang or official in any way?
             <img src="assets/images/icons/arrow.svg" class="faq-icon" />
@@ -1033,7 +1072,7 @@
     </section>
 
     <!-- Footer -->
-    <section class="footer" id="footer">
+    <section class="footer animation-footer" id="footer">
       <div class="footer-content-wrapper">
         <div class="footer-credits-main">
           <p>Designed by DiamondIsntHere</p>
