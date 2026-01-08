@@ -284,6 +284,9 @@
         touch-action: pan-y;
         cursor: grab;
         transition: 0.3s;
+        user-select: none;
+        -webkit-user-drag: none;
+        touch-action: pan-y;
       }
       .carousel-container.dragging {
         cursor: grabbing;
@@ -294,9 +297,11 @@
         width: 100%;
         height: 100%;
         transition: transform 0.5s ease-in-out;
+        will-change: transform;
       }
 
       .carousel-image-item {
+        pointer-events: none;
         min-width: 100%;
         height: 100%;
         object-fit: contain;
@@ -392,7 +397,7 @@
       .faq {
         padding: 40px 20px;
         text-align: center;
-        background-color: #fff;
+        background-color: #f0f0f0;
         color: #333;
         scroll-margin-top: 90px;
       }
@@ -611,6 +616,10 @@
       }
 
 
+      #changelog {
+        background-color: #fff;
+      }
+
       #changelog .faq-answer h3 {
         margin: 0;
         font-family: "Minecraft Ten";
@@ -654,7 +663,7 @@
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        max-width: 1200px;
+        max-width: 900px;
         width: 100%;
         margin-bottom: 30px;
         text-align: left;
@@ -1103,7 +1112,7 @@
           </summary>
           <div class="faq-answer">
             <p>
-              Yes, it;s licensed under CC-BY-4.0. That means you're free to
+              Yes, it's licensed under CC-BY-4.0. That means you're free to
               share and adapt the pack as long as you credit the creators and
               follow the license terms.
             </p>
@@ -1129,7 +1138,6 @@
     <section class="footer animation-footer" id="footer">
       <div class="footer-content-wrapper">
         <div class="footer-credits-main">
-          <p>Designed by DiamondIsntHere</p>
           <p><a href="credits.html" class="credits">Credits</a></p>
         </div>
         <div class="logo-footer">

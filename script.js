@@ -8,7 +8,6 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// Array of image sources for the carousel
 const images = [
   "assets/images/gallery/1.png",
   "assets/images/gallery/2.png",
@@ -18,14 +17,12 @@ const images = [
   "assets/images/gallery/6.png",
 ];
 
-// Variables to keep track of carousel state and drag operations
 let currentIndex = 0;
-let touchStartX = 0;
-let initialTransformX = 0;
 let isDragging = false;
 let startPos = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
 
-// Get references to DOM elements
 const carouselTrack = document.querySelector(".carousel-track");
 const prevButton = document.querySelector(".carousel-button.prev");
 const nextButton = document.querySelector(".carousel-button.next");
@@ -34,13 +31,17 @@ const carouselContainer = document.querySelector(".carousel-container");
 
 let allDots = [];
 
-// Function to dynamically create image elements and their corresponding dots
+// 1. Setup Carousel
 function populateCarouselAndDots() {
   images.forEach((src, index) => {
     const img = document.createElement("img");
     img.src = src;
     img.alt = `Minecraft Scene ${index + 1}`;
     img.classList.add("carousel-image-item");
+
+    // STOP THE GLITCH: Disable default browser ghosting/dragging
+    img.draggable = false;
+
     img.onerror = () => {
       img.src = `https://placehold.co/800x450/cccccc/333333?text=Image+${
         index + 1
@@ -57,171 +58,104 @@ function populateCarouselAndDots() {
   });
 }
 
-// Function to update the carousel and display the image at the given index
+// 2. Core Navigation Logic
 function showImage(index) {
   const imagesCount = images.length;
-  if (index >= imagesCount) {
-    currentIndex = 0;
-  } else if (index < 0) {
-    currentIndex = imagesCount - 1;
-  } else {
-    currentIndex = index;
-  }
 
-  carouselTrack.style.transition = "transform 0.5s ease-in-out";
+  if (index >= imagesCount) currentIndex = 0;
+  else if (index < 0) currentIndex = imagesCount - 1;
+  else currentIndex = index;
 
-  const translateValue = -currentIndex * 100;
-  carouselTrack.style.transform = `translateX(${translateValue}%)`;
+  // Re-enable transition for the snap effect
+  carouselTrack.style.transition = "transform 0.4s ease-out";
 
+  currentTranslate = currentIndex * -100;
+  prevTranslate = currentTranslate;
+
+  carouselTrack.style.transform = `translateX(${currentTranslate}%)`;
   updateActiveDot();
 }
 
-// Functions to navigate to the previous or next image
-function prevImage() {
-  showImage(currentIndex - 1);
-}
-
-function nextImage() {
-  showImage(currentIndex + 1);
-}
-
-// Function to update the active dot indicator
 function updateActiveDot() {
-  allDots.forEach((dot, index) => {
-    if (index === currentIndex) {
-      dot.classList.add("active");
-    } else {
-      dot.classList.remove("active");
-    }
+  allDots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === currentIndex);
   });
 }
 
-// Add event listeners to navigation buttons
-prevButton.addEventListener("click", prevImage);
-nextButton.addEventListener("click", nextImage);
+// 3. Event Listeners for Buttons/Keys
+prevButton.addEventListener("click", () => showImage(currentIndex - 1));
+nextButton.addEventListener("click", () => showImage(currentIndex + 1));
 
-// Initialize the carousel on page load
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+  if (e.key === "ArrowRight") showImage(currentIndex + 1);
+});
+
+// 4. Drag & Swipe Logic (The "Anti-Glitch" Version)
+function getPositionX(event) {
+  return event.type.includes("mouse")
+    ? event.clientX
+    : event.touches[0].clientX;
+}
+
+function dragStart(event) {
+  // Only left click for mouse
+  if (event.type.includes("mouse") && event.button !== 0) return;
+
+  isDragging = true;
+  startPos = getPositionX(event);
+
+  // Kill transition so it follows the finger/mouse instantly
+  carouselTrack.style.transition = "none";
+  carouselContainer.classList.add("dragging");
+}
+
+function dragMove(event) {
+  if (!isDragging) return;
+
+  const currentPosition = getPositionX(event);
+  const diff = currentPosition - startPos;
+
+  // Calculate percentage of movement based on container width
+  const dragPercent = (diff / carouselContainer.offsetWidth) * 100;
+
+  currentTranslate = prevTranslate + dragPercent;
+  carouselTrack.style.transform = `translateX(${currentTranslate}%)`;
+}
+
+function dragEnd() {
+  if (!isDragging) return;
+  isDragging = false;
+  carouselContainer.classList.remove("dragging");
+
+  const movedBy = currentTranslate - prevTranslate;
+
+  // If dragged more than 15% of the slide width, move to next/prev
+  if (movedBy < -15) {
+    showImage(currentIndex + 1);
+  } else if (movedBy > 15) {
+    showImage(currentIndex - 1);
+  } else {
+    // Snap back to current image if didn't drag far enough
+    showImage(currentIndex);
+  }
+}
+
+// Mouse Events
+carouselContainer.addEventListener("mousedown", dragStart);
+window.addEventListener("mousemove", dragMove);
+window.addEventListener("mouseup", dragEnd);
+
+// Touch Events
+carouselContainer.addEventListener("touchstart", dragStart, { passive: true });
+carouselContainer.addEventListener("touchmove", dragMove, { passive: false });
+carouselContainer.addEventListener("touchend", dragEnd);
+
+// Initialize
 window.onload = () => {
   populateCarouselAndDots();
-  showImage(currentIndex);
+  showImage(0);
 };
-
-// Handle arrow key navigation
-document.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowLeft") {
-    prevImage();
-  } else if (event.key === "ArrowRight") {
-    nextImage();
-  }
-});
-
-// --- Mouse Drag Functionality ---
-
-// Helper function to get current translateX percentage
-function getCarouselCurrentTranslateXPercentage() {
-  const style = window.getComputedStyle(carouselTrack);
-  const matrix = new DOMMatrixReadOnly(style.transform);
-  const carouselContainerWidth = carouselTrack.parentElement.clientWidth;
-  return (matrix.m41 / carouselContainerWidth) * 100;
-}
-
-// Mouse down event handler for dragging
-carouselContainer.addEventListener("mousedown", (event) => {
-  if (event.button !== 0) return;
-
-  isDragging = true;
-  startPos = event.clientX;
-  carouselTrack.style.transition = "none";
-  carouselContainer.classList.add("dragging");
-
-  initialTransformX = getCarouselCurrentTranslateXPercentage();
-
-  document.addEventListener("mousemove", mouseMoveHandler);
-  document.addEventListener("mouseup", mouseUpHandler);
-  event.preventDefault();
-});
-
-// Mouse move event handler for dragging
-function mouseMoveHandler(event) {
-  if (!isDragging) return;
-
-  const currentMouseX = event.clientX;
-  const dragDistance = currentMouseX - startPos;
-  const carouselContainerWidth = carouselTrack.parentElement.clientWidth;
-  const dragPercentage = (dragDistance / carouselContainerWidth) * 100;
-
-  carouselTrack.style.transform = `translateX(${
-    initialTransformX + dragPercentage
-  }%)`;
-}
-
-// Mouse up event handler to determine swipe direction or snap back
-function mouseUpHandler(event) {
-  if (!isDragging) return;
-  isDragging = false;
-  carouselContainer.classList.remove("dragging");
-
-  const endPos = event.clientX;
-  const swipeDistance = endPos - startPos;
-  const swipeThreshold = 50;
-
-  if (swipeDistance > swipeThreshold) {
-    showImage(currentIndex - 1);
-  } else if (swipeDistance < -swipeThreshold) {
-    showImage(currentIndex + 1);
-  } else {
-    showImage(currentIndex);
-  }
-
-  document.removeEventListener("mousemove", mouseMoveHandler);
-  document.removeEventListener("mouseup", mouseUpHandler);
-}
-
-// --- Touch Swipe Functionality ---
-
-// Touch start event handler for swiping
-carouselContainer.addEventListener("touchstart", (event) => {
-  touchStartX = event.changedTouches[0].screenX;
-  isDragging = true;
-  carouselTrack.style.transition = "none";
-  carouselContainer.classList.add("dragging");
-
-  initialTransformX = getCarouselCurrentTranslateXPercentage();
-});
-
-// Touch move event handler for swiping
-carouselContainer.addEventListener("touchmove", (event) => {
-  if (!isDragging) return;
-
-  const currentTouchX = event.changedTouches[0].screenX;
-  const dragDistance = currentTouchX - touchStartX;
-  const carouselContainerWidth = carouselTrack.parentElement.clientWidth;
-  const dragPercentage = (dragDistance / carouselContainerWidth) * 100;
-
-  carouselTrack.style.transform = `translateX(${
-    initialTransformX + dragPercentage
-  }%)`;
-  event.preventDefault();
-});
-
-// Touch end event handler to determine swipe direction or snap back
-carouselContainer.addEventListener("touchend", (event) => {
-  if (!isDragging) return;
-  isDragging = false;
-  carouselContainer.classList.remove("dragging");
-
-  const touchEndX = event.changedTouches[0].screenX;
-  const swipeDistance = touchEndX - touchStartX;
-  const swipeThreshold = 50;
-
-  if (swipeDistance > swipeThreshold) {
-    showImage(currentIndex - 1);
-  } else if (swipeDistance < -swipeThreshold) {
-    showImage(currentIndex + 1);
-  } else {
-    showImage(currentIndex);
-  }
-});
 
 // --- FAQ Functionality ---
 
