@@ -31,7 +31,7 @@ const carouselContainer = document.querySelector(".carousel-container");
 
 let allDots = [];
 
-// 1. Setup Carousel
+// Setup Carousel
 function populateCarouselAndDots() {
   images.forEach((src, index) => {
     const img = document.createElement("img");
@@ -58,7 +58,7 @@ function populateCarouselAndDots() {
   });
 }
 
-// 2. Core Navigation Logic
+// Core Navigation Logic
 function showImage(index) {
   const imagesCount = images.length;
 
@@ -82,7 +82,7 @@ function updateActiveDot() {
   });
 }
 
-// 3. Event Listeners for Buttons/Keys
+// Event Listeners for Buttons/Keys
 prevButton.addEventListener("click", () => showImage(currentIndex - 1));
 nextButton.addEventListener("click", () => showImage(currentIndex + 1));
 
@@ -91,7 +91,7 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight") showImage(currentIndex + 1);
 });
 
-// 4. Drag & Swipe Logic (The "Anti-Glitch" Version)
+// Drag & Swipe Logic
 function getPositionX(event) {
   return event.type.includes("mouse")
     ? event.clientX
@@ -157,7 +157,7 @@ window.onload = () => {
   showImage(0);
 };
 
-// --- FAQ Functionality ---
+// FAQ functionality
 
 // DOMContentLoaded listener for FAQ animations
 document.addEventListener("DOMContentLoaded", () => {
