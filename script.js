@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
             item.open = false;
             answer.removeEventListener("transitionend", handler);
           },
-          { once: true }
+          { once: true },
         );
       } else {
         item.open = true;
@@ -226,7 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Listener to reset maxHeight to 'auto' after opening animation
     answer.addEventListener("transitionend", () => {
       if (item.open && answer.style.maxHeight !== "auto") {
         answer.style.maxHeight = "auto";
@@ -234,3 +233,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// Changelog
+
+function loadChangelogs() {
+  const JavaDiv = document.getElementById("java-changelog");
+  const BedrockDiv = document.getElementById("bedrock-changelog");
+
+  if (JavaDiv) JavaDiv.innerHTML = marked.parse(JavaChangelog);
+  if (BedrockDiv) BedrockDiv.innerHTML = marked.parse(BedrockChangelog);
+}
+
+document.addEventListener("DOMContentLoaded", loadChangelogs);
