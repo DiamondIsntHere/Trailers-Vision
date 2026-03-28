@@ -5,6 +5,7 @@ const JavaChangelog = `
 
 * 3D Doors
 * 3D Trapdoors
+* Golden Dandelion
 
 ## **Items**
 
@@ -15,6 +16,7 @@ const JavaChangelog = `
 
 ## **Entities**
 
+* All Baby Mobs
 * Baby Nautilus
 * Camel Husk
 * Nautilus
@@ -39,6 +41,7 @@ const JavaChangelog = `
 * All Tools
 * Amethyst Shard
 * Arrows
+* Baked Potato
 * Barrier
 * Boats
 * Bow
@@ -73,7 +76,9 @@ const JavaChangelog = `
 * Lapis Lazuli
 * Leaf Letter
 * Mace
+* Melon
 * Minecarts
+* Name Tag
 * Nether Brick
 * Potato
 * Quartz
@@ -112,10 +117,14 @@ const JavaChangelog = `
 * Fox
 * Horse
 * Husk
+* Polar Bear
+* Rabbit
 * Shield
 * Shulker
 * Snow Golem
+* Villager
 * Warden
+* Wolf
 * Zombie
 * Zombie Villager
 
@@ -146,6 +155,10 @@ const JavaChangelog = `
 const BedrockChangelog = `
 # **New Additions**
 
+## **Blocks**
+
+* Golden Dandelion
+
 ## **Items**
 
 * Nautilus Armor
@@ -155,6 +168,7 @@ const BedrockChangelog = `
 
 ## **Entities**
 
+* All Baby Mobs
 * Baby Nautilus
 * Camel Husk
 * Nautilus
@@ -164,6 +178,9 @@ const BedrockChangelog = `
 ## **Other**
 
 * Breath of the Nautilus (Mob Effect)
+* 3D Hanging Signs
+* 3D Signs
+* 3D Torches
 
 ---
 
@@ -179,6 +196,7 @@ const BedrockChangelog = `
 * All Tools
 * Amethyst Shard
 * Arrows
+* Baked Potato
 * Barrier
 * Boats
 * Bow
@@ -213,7 +231,9 @@ const BedrockChangelog = `
 * Lapis Lazuli
 * Leaf Letter
 * Mace
+* Melon
 * Minecarts
+* Name Tag
 * Nether Brick
 * Potato
 * Quartz
@@ -252,10 +272,14 @@ const BedrockChangelog = `
 * Fox
 * Horse
 * Husk
+* Polar Bear
+* Rabbit
 * Shield
 * Shulker
 * Snow Golem
+* Villager
 * Warden
+* Wolf
 * Zombie
 * Zombie Villager
 
