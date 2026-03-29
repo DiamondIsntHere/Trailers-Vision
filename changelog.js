@@ -178,6 +178,7 @@ const BedrockChangelog = `
 ## **Other**
 
 * Breath of the Nautilus (Mob Effect)
+* Water Caustics (For Vibrant Visuals)
 * 3D Hanging Signs
 * 3D Signs
 * 3D Torches
